@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    
+    <!-- SEO & Social Sharing (Marketing Essential) -->
+    <title>MahjongMaster | 雀魂麻将究极助手</title>
+    <meta name="description" content="全自动雀魂AI助手，实时胜率预测，帮您掌控牌局。加入内部群获取最新防封版本。" />
+    
+    <!-- Open Graph / QQ / WeChat Sharing Preview -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="MahjongMaster | 雀魂AI助手" />
+    <meta property="og:description" content="不做运气的奴隶，成为数据的主宰。实时胜率预测，全自动托管打牌。" />
+    <meta property="og:image" content="https://api.iconify.design/game-icons:mahjong.svg?color=%2300ff9d" />
+    
+    <!-- Favicon (Mahjong Tile Emoji) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🀄️</text></svg>">
+    
+    <!-- Mobile Web App Capable -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#0a0a12" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'neon-green': '#00ff9d',
+              'neon-purple': '#b026ff',
+              'dark-bg': '#0a0a12',
+              'card-bg': '#151520',
+            },
+            animation: {
+              'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'glow': 'glow 2s ease-in-out infinite alternate',
+              'fade-in-down': 'fadeInDown 0.5s ease-out',
+            },
+            keyframes: {
+              glow: {
+                '0%': { boxShadow: '0 0 5px #00ff9d' },
+                '100%': { boxShadow: '0 0 20px #00ff9d, 0 0 10px #b026ff' },
+              },
+              fadeInDown: {
+                '0%': { opacity: '0', transform: 'translateY(-10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      body {
+        background-color: #0a0a12;
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        -webkit-tap-highlight-color: transparent;
+      }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+  }
+}
+</script>
+</head>
+<body class="min-h-screen pb-32 overflow-x-hidden selection:bg-neon-green/30">
+
+    <!-- Hero Section -->
+    <header class="relative pt-20 pb-32 px-6 text-center overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neon-purple/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute top-0 w-full h-full opacity-10 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
+
+        <div class="relative z-10 max-w-5xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/80 border border-slate-700 mb-6 animate-fade-in-down">
+                <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                <span class="text-xs font-mono text-neon-green tracking-widest">SYSTEM STATUS: ONLINE</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500">掌控牌局</span>
+                <br />
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-neon-green to-blue-500">预见未来</span>
+            </h1>
+            
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+                专为雀魂(Majsoul)打造的顶尖AI辅助系统。<br class="hidden sm:block" />
+                不做运气的奴隶，成为数据的主宰。
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#demo" onclick="alert('联系方式：QQ1106131344/2110417355')" class="px-8 py-4 bg-neon-green text-black font-bold rounded-lg hover:bg-[#00cc7d] transition-colors shadow-[0_0_20px_rgba(0,255,157,0.4)] cursor-pointer">
+                    体验 AI 模拟
+                </a>
+                <a href="#features" class="px-8 py-4 bg-slate-800 text-white font-bold rounded-lg hover:bg-slate-700 border border-slate-700 transition-colors">
+                    了解核心功能
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Demo Section -->
+    <section id="demo" class="px-4 py-10 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-4">实时演算内核演示</h2>
+                <p class="text-gray-400">基于数百万局牌谱训练的深度学习模型</p>
+            </div>
+            
+            <!-- AI Demo Component -->
+            <div class="w-full max-w-4xl mx-auto p-4 sm:p-8 bg-card-bg border border-slate-700 rounded-2xl shadow-2xl relative overflow-hidden group">
+                <!-- Background Decor -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-neon-purple opacity-5 blur-[100px] pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-neon-green opacity-5 blur-[100px] pointer-events-none"></div>
+
+                <div class="relative z-10">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex items-center space-x-2">
+                            <!-- Cpu Icon -->
+                            <svg class="text-neon-green w-6 h-6 animate-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>
+                            <h3 class="text-xl font-bold text-white tracking-widest">MAHJONG_MASTER v4.0.2 <span class="text-xs text-gray-400 bg-gray-800 px-2 py-1 rounded ml-2">LIVE</span></h3>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-sm text-gray-400">当前局势</div>
+                            <div class="text-neon-green font-mono">东三局 12本场</div>
+                        </div>
+                    </div>
+
+                    <!-- Tiles Container -->
+                    <div id="tile-container" class="flex flex-wrap justify-center gap-1 sm:gap-2 mb-8 p-4 bg-slate-800/50 rounded-xl border border-slate-700/50 min-h-[80px]">
+                        <!-- Tiles injected by JS -->
+                    </div>
+
+                    <!-- Analysis UI -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Stats Panel -->
+                        <div class="bg-black/40 p-4 rounded-lg border border-slate-700 flex flex-col justify-between h-32">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-400 text-sm flex items-center">
+                                    <!-- Activity Icon -->
+                                    <svg class="mr-1 w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                                    实时胜率预测
+                                </span>
+                                <span id="analysis-status" class="text-neon-green text-xs animate-pulse hidden">CALCULATING...</span>
+                            </div>
+                            <div id="win-rate-display" class="text-4xl font-mono font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-blue-500">
+                                0.0%
+                            </div>
+                            <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                                <div id="win-rate-bar" class="h-full bg-neon-green transition-all duration-1000 ease-out" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Action Panel -->
+                        <div class="bg-black/40 p-4 rounded-lg border border-slate-700 flex flex-col justify-center items-center h-32">
+                            <div id="action-content" class="w-full h-full flex items-center justify-center">
+                                <!-- Content injected by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex justify-center">
+                        <button id="simulate-btn" class="group relative px-8 py-3 bg-neon-green/10 hover:bg-neon-green/20 text-neon-green font-bold rounded-full border border-neon-green transition-all hover:shadow-[0_0_20px_rgba(52,211,153,0.4)] disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden">
+                            <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1s_infinite]"></div>
+                            <span class="flex items-center gap-2">
+                                <!-- Zap Icon -->
+                                <svg class="w-[18px] h-[18px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                <span id="simulate-btn-text">立即模拟 (Simulate)</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section id="features" class="py-20 px-6 bg-black/20">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">超越人类极限的计算力</h2>
+                <div class="h-1 w-20 bg-neon-purple mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-card-bg p-6 rounded-xl border border-slate-800 hover:border-neon-purple/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(176,38,255,0.1)] group">
+                    <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <svg class="text-neon-purple w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.97-3.465"/><path d="M17.97 14.535A4 4 0 0 1 18 18"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">全自动托管打牌</h3>
+                    <p class="text-gray-400 leading-relaxed">解放双手，AI 自动执行最优解。无论是快速场还是段位战，不仅能打，而且打得好。完美模拟高手思路。</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-card-bg p-6 rounded-xl border border-slate-800 hover:border-neon-purple/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(176,38,255,0.1)] group">
+                    <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <svg class="text-neon-green w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="22" x2="18" y1="12" y2="12"/><line x1="6" x2="2" y1="12" y2="12"/><line x1="12" x2="12" y1="6" y2="2"/><line x1="12" x2="12" y1="22" y2="18"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">胜率实时预测</h3>
+                    <p class="text-gray-400 leading-relaxed">上帝视角显示每一张切牌后的听牌胜率、改良进张以及对手可能的听牌范围。不再迷茫。</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-card-bg p-6 rounded-xl border border-slate-800 hover:border-neon-purple/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(176,38,255,0.1)] group">
+                    <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <svg class="text-blue-500 w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">智能防点炮</h3>
+                    <p class="text-gray-400 leading-relaxed">通过深度分析场上舍牌，精确计算对手听牌危险度。在进攻与防守之间找到完美平衡点。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto bg-slate-900/50 rounded-2xl border border-slate-800 p-8 sm:p-12">
+            <h2 class="text-2xl font-bold mb-8 text-center">为什么选择 MahjongMaster?</h2>
+            <div class="space-y-4">
+                <div class="flex items-center gap-4">
+                    <svg class="text-neon-green w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                    <p class="text-lg">独家算法内核，非市面普通脚本可比</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <svg class="text-neon-green w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                    <p class="text-lg">持续更新适配雀魂最新版本，稳定奔放</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <svg class="text-neon-green w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                    <p class="text-lg">专属内部群，提供 1对1 远程安装与调试服务</p>
+                </div>
+                <div class="flex items-center gap-4 text-gray-500">
+                    <svg class="text-yellow-600 w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                    <p class="text-sm">郑重声明：本工具仅供学习AI算法研究使用，请勿用于破坏游戏公平性（懂的都懂）。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spacer -->
+    <div class="h-20"></div>
+
+    <!-- Sticky Contact -->
+    <div class="fixed bottom-0 left-0 w-full bg-black/90 backdrop-blur-md border-t border-neon-purple/50 z-50 py-4 px-4 shadow-[0_-5px_20px_rgba(0,0,0,0.8)]">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse border border-black"></span>
+                    <svg class="text-neon-green w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-lg leading-tight">加入内部核心群</h4>
+                    <p class="text-gray-400 text-xs">获取最新防封版本 & 实时指导</p>
+                </div>
+            </div>
+
+            <div class="flex gap-2 sm:gap-4 w-full sm:w-auto">
+                <div onclick="copyQQ('1106131344')" class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg cursor-pointer border border-slate-600 transition-colors">
+                    <span class="font-mono font-bold text-neon-green">QQ: 1106131344</span>
+                    <svg class="text-gray-400 w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                </div>
+                <div onclick="copyQQ('2110417355')" class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg cursor-pointer border border-slate-600 transition-colors">
+                    <span class="font-mono font-bold text-neon-green">QQ: 2110417355</span>
+                    <svg class="text-gray-400 w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // Constants
+        const INITIAL_HAND = [
+            { id: 1, type: 'man', value: 1, symbol: '🀇' },
+            { id: 2, type: 'man', value: 2, symbol: '🀈' },
+            { id: 3, type: 'man', value: 3, symbol: '🀉' },
+            { id: 4, type: 'pin', value: 4, symbol: '🀝' },
+            { id: 5, type: 'pin', value: 5, symbol: '🀞' },
+            { id: 6, type: 'pin', value: 6, symbol: '🀟' },
+            { id: 7, type: 'sou', value: 1, symbol: '🀐' },
+            { id: 8, type: 'sou', value: 2, symbol: '🀑' },
+            { id: 9, type: 'sou', value: 3, symbol: '🀒' },
+            { id: 10, type: 'honors', value: 1, symbol: '🀀' },
+            { id: 11, type: 'honors', value: 1, symbol: '🀀' },
+            { id: 12, type: 'honors', value: 5, symbol: '🀆' },
+            { id: 13, type: 'honors', value: 6, symbol: '🀅' },
+        ];
+
+        // State
+        let state = {
+            analyzing: false,
+            result: null // { discardIndex: number, winRate: number }
+        };
+
+        // Utility to copy QQ
+        function copyQQ(qq) {
+            navigator.clipboard.writeText(qq).then(() => {
+                alert('QQ号 ' + qq + ' 已复制');
+            });
+        }
+
+        // Render Tiles
+        function renderTiles() {
+            const container = document.getElementById('tile-container');
+            container.innerHTML = '';
+
+            INITIAL_HAND.forEach((tile, index) => {
+                const isHighlight = state.result && state.result.discardIndex === index;
+                const isDimmed = state.result && state.result.discardIndex !== index;
+                
+                const tileColor = tile.type === 'man' ? '#8b0000' : tile.type === 'sou' ? '#006400' : 'black';
+                
+                // Construct classes
+                let classes = "relative w-10 h-14 sm:w-12 sm:h-16 bg-slate-100 rounded-md shadow-[0_4px_0_#cbd5e1] flex items-center justify-center text-3xl sm:text-4xl select-none cursor-pointer transition-all duration-300 transform border border-gray-300";
+                
+                if (isHighlight) {
+                    classes += " translate-y-[-10px] shadow-[0_14px_0_#34d399] border-neon-green ring-2 ring-neon-green z-10";
+                } else if (isDimmed) {
+                    classes += " opacity-50 grayscale";
+                } else {
+                    classes += " hover:translate-y-[-2px] hover:shadow-[0_6px_0_#cbd5e1]";
+                }
+
+                const el = document.createElement('div');
+                el.className = classes;
+                el.style.color = tileColor;
+                el.innerHTML = `
+                    <span class="drop-shadow-sm">${tile.symbol}</span>
+                    ${isHighlight ? '<div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-neon-green text-black text-[10px] font-bold px-2 py-0.5 rounded shadow-lg animate-bounce">切</div>' : ''}
+                `;
+                
+                container.appendChild(el);
+            });
+        }
+
+        // Render Status
+        function renderStatus() {
+            const btn = document.getElementById('simulate-btn');
+            const btnText = document.getElementById('simulate-btn-text');
+            const statusEl = document.getElementById('analysis-status');
+            const winRateDisplay = document.getElementById('win-rate-display');
+            const winRateBar = document.getElementById('win-rate-bar');
+            const actionContent = document.getElementById('action-content');
+
+            // Button State
+            if (state.analyzing) {
+                btn.disabled = true;
+                btnText.textContent = "AI 分析中...";
+                statusEl.classList.remove('hidden');
+            } else {
+                btn.disabled = false;
+                btnText.textContent = "立即模拟 (Simulate)";
+                statusEl.classList.add('hidden');
+            }
+
+            // Win Rate Display
+            if (state.analyzing) {
+                winRateDisplay.innerHTML = '<span class="animate-pulse">--.-%</span>';
+                winRateBar.style.width = '0%';
+            } else if (state.result) {
+                winRateDisplay.textContent = state.result.winRate + '%';
+                winRateBar.style.width = state.result.winRate + '%';
+            } else {
+                winRateDisplay.textContent = '0.0%';
+                winRateBar.style.width = '0%';
+            }
+
+            // Action Content
+            if (!state.analyzing && state.result) {
+                const targetTile = INITIAL_HAND[state.result.discardIndex];
+                actionContent.innerHTML = `
+                   <div class="text-center animate-[fadeIn_0.5s_ease-out]">
+                      <p class="text-gray-400 text-xs uppercase tracking-widest mb-1">最佳策略 / Best Move</p>
+                      <p class="text-2xl font-bold text-white mb-1">切 <span class="text-neon-green">${targetTile.symbol}</span> 听牌</p>
+                      <p class="text-xs text-neon-purple">期望值 +12000 pts</p>
+                   </div>
+                `;
+            } else {
+                // Waiting or Loading state
+                const iconClass = state.analyzing ? "animate-spin" : "";
+                const text = state.analyzing ? "分析牌谱中..." : "等待输入...";
+                
+                actionContent.innerHTML = `
+                   <div class="flex flex-col items-center justify-center text-gray-500">
+                      <svg class="w-8 h-8 mb-2 ${iconClass}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                      <span class="text-xs tracking-wider">${text}</span>
+                   </div>
+                `;
+            }
+        }
+
+        // Logic
+        function runAnalysis() {
+            if (state.analyzing) return;
+            
+            state.analyzing = true;
+            state.result = null;
+            
+            renderTiles();
+            renderStatus();
+
+            setTimeout(() => {
+                state.analyzing = false;
+                state.result = {
+                    discardIndex: 12, // The last tile
+                    winRate: 88.4
+                };
+                renderTiles();
+                renderStatus();
+            }, 1500);
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('simulate-btn');
+            btn.addEventListener('click', runAnalysis);
+
+            // Initial Render
+            renderTiles();
+            renderStatus();
+            
+            // Auto run once
+            setTimeout(runAnalysis, 1000);
+        });
+
+    </script>
+</body>
+</html>
