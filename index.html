@@ -4,23 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     
-    <!-- SEO & Social Sharing (Marketing Essential) -->
+    <!-- SEO & Social Sharing -->
     <title>MahjongMaster | 雀魂麻将究极助手</title>
     <meta name="description" content="全自动雀魂AI助手，实时胜率预测，帮您掌控牌局。加入内部群获取最新防封版本。" />
     
-    <!-- Open Graph / QQ / WeChat Sharing Preview -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="MahjongMaster | 雀魂AI助手" />
     <meta property="og:description" content="不做运气的奴隶，成为数据的主宰。实时胜率预测，全自动托管打牌。" />
-    <meta property="og:image" content="https://api.iconify.design/game-icons:mahjong.svg?color=%2300ff9d" />
     
-    <!-- Favicon (Mahjong Tile Emoji) -->
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🀄️</text></svg>">
     
-    <!-- Mobile Web App Capable -->
+    <!-- Mobile Web App -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="theme-color" content="#0a0a12" />
+    <meta name="theme-color" content="#1e1b2e" />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -28,24 +26,29 @@
         theme: {
           extend: {
             colors: {
-              'neon-green': '#00ff9d',
-              'neon-purple': '#b026ff',
-              'dark-bg': '#0a0a12',
-              'card-bg': '#151520',
+              'anime-bg': '#1a1b2e',
+              'anime-card': '#242642',
+              'anime-pink': '#ff7eb3',
+              'anime-blue': '#7afcff',
+              'anime-purple': '#b026ff',
+              'gold': '#ffd700',
+            },
+            fontFamily: {
+              'game': ['"Segoe UI"', 'Meiryo', 'system-ui', 'sans-serif'],
             },
             animation: {
+              'float': 'float 6s ease-in-out infinite',
               'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'glow': 'glow 2s ease-in-out infinite alternate',
-              'fade-in-down': 'fadeInDown 0.5s ease-out',
+              'shimmer': 'shimmer 2.5s infinite linear',
             },
             keyframes: {
-              glow: {
-                '0%': { boxShadow: '0 0 5px #00ff9d' },
-                '100%': { boxShadow: '0 0 20px #00ff9d, 0 0 10px #b026ff' },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
               },
-              fadeInDown: {
-                '0%': { opacity: '0', transform: 'translateY(-10px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
+              shimmer: {
+                '0%': { backgroundPosition: '-200% 0' },
+                '100%': { backgroundPosition: '200% 0' },
               }
             }
           },
@@ -54,10 +57,61 @@
     </script>
     <style>
       body {
-        background-color: #0a0a12;
+        background-color: #1a1b2e;
         color: white;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        -webkit-tap-highlight-color: transparent;
+        font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        background-image: 
+          radial-gradient(circle at 15% 50%, rgba(176, 38, 255, 0.08) 0%, transparent 25%), 
+          radial-gradient(circle at 85% 30%, rgba(255, 126, 179, 0.08) 0%, transparent 25%);
+        overflow-x: hidden;
+      }
+
+      /* Japanese Pattern Overlay (Seigaiha-ish) */
+      .bg-pattern {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Sakura Animation */
+      .sakura-container {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+      }
+      .sakura {
+        position: absolute;
+        background-color: #ffb7d5;
+        border-radius: 100% 0 100% 0;
+        animation: fall linear infinite;
+        opacity: 0.6;
+      }
+      @keyframes fall {
+        0% { top: -10%; transform: rotate(0deg) translateX(0); opacity: 0; }
+        20% { opacity: 0.8; }
+        100% { top: 110%; transform: rotate(360deg) translateX(50px); opacity: 0; }
+      }
+
+      /* Game UI Elements */
+      .glass-panel {
+        background: rgba(36, 38, 66, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      }
+      
+      .btn-game {
+        position: relative;
+        clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        transition: all 0.3s ease;
+      }
+      .btn-game:active {
+        transform: scale(0.95);
       }
     </style>
 <script type="importmap">
@@ -70,110 +124,138 @@
 }
 </script>
 </head>
-<body class="min-h-screen pb-32 overflow-x-hidden selection:bg-neon-green/30">
+<body class="min-h-screen pb-32">
+
+    <!-- Background Elements -->
+    <div class="bg-pattern"></div>
+    <div class="sakura-container" id="sakura-container"></div>
+
+    <!-- Navigation / Header -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center glass-panel rounded-full px-6 py-3 border-anime-pink/20">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🀄️</span>
+                <span class="font-bold text-white tracking-wider">MAHJONG<span class="text-anime-pink">MASTER</span></span>
+            </div>
+            <div class="hidden sm:flex gap-6 text-sm font-bold text-gray-300">
+                <a href="#demo" class="hover:text-anime-blue transition-colors">模拟演示</a>
+                <a href="#features" class="hover:text-anime-blue transition-colors">核心功能</a>
+                <span class="text-anime-pink cursor-pointer" onclick="alert('QQ: 1106131344')">联系我们</span>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <header class="relative pt-20 pb-32 px-6 text-center overflow-hidden">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neon-purple/10 rounded-full blur-[120px] pointer-events-none"></div>
-        <div class="absolute top-0 w-full h-full opacity-10 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
+    <header class="relative pt-32 pb-20 px-6 text-center overflow-hidden z-10">
+        <!-- Decor lines -->
+        <div class="absolute top-40 left-0 w-full h-px bg-gradient-to-r from-transparent via-anime-pink/30 to-transparent"></div>
+        <div class="absolute top-44 left-0 w-full h-px bg-gradient-to-r from-transparent via-anime-blue/30 to-transparent"></div>
 
-        <div class="relative z-10 max-w-5xl mx-auto">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/80 border border-slate-700 mb-6 animate-fade-in-down">
-                <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-                <span class="text-xs font-mono text-neon-green tracking-widest">SYSTEM STATUS: ONLINE</span>
+        <div class="relative max-w-5xl mx-auto">
+            <div class="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-black/40 border border-anime-blue/50 mb-8 backdrop-blur-sm animate-float">
+                <span class="w-2 h-2 rounded-full bg-anime-pink animate-pulse"></span>
+                <span class="text-xs font-bold font-mono text-anime-blue tracking-[0.2em]">SYSTEM_ONLINE // V4.0.2</span>
             </div>
             
-            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500">掌控牌局</span>
+            <h1 class="text-5xl md:text-8xl font-black mb-6 tracking-tight italic" style="text-shadow: 0 0 30px rgba(176,38,255,0.4)">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-anime-blue to-white">掌控</span>
+                <span class="text-anime-pink relative inline-block">
+                    牌局
+                    <svg class="absolute -top-6 -right-8 w-12 h-12 text-yellow-400 animate-pulse" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                </span>
                 <br />
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-neon-green to-blue-500">预见未来</span>
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-anime-purple via-white to-anime-pink text-4xl md:text-7xl">预见未来</span>
             </h1>
             
-            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
-                专为雀魂(Majsoul)打造的顶尖AI辅助系统。<br class="hidden sm:block" />
-                不做运气的奴隶，成为数据的主宰。
+            <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed">
+                专为<span class="text-anime-blue font-bold">雀魂(Majsoul)</span>打造的
+                <span class="bg-anime-pink text-black px-1 transform -skew-x-12 inline-block text-base font-bold mx-1">AI辅助系统</span>
+                <br />
+                打破运气的枷锁，这就是「科学麻将」的极致。
             </p>
             
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#demo" onclick="alert('联系方式：QQ1106131344/2110417355')" class="px-8 py-4 bg-neon-green text-black font-bold rounded-lg hover:bg-[#00cc7d] transition-colors shadow-[0_0_20px_rgba(0,255,157,0.4)] cursor-pointer">
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <a href="#demo" onclick="alert('联系方式：QQ1106131344/2110417355')" class="btn-game px-10 py-4 bg-gradient-to-r from-anime-pink to-purple-600 text-white font-bold text-lg hover:brightness-110 shadow-[0_0_20px_rgba(255,126,179,0.5)] cursor-pointer flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     体验 AI 模拟
                 </a>
-                <a href="#features" class="px-8 py-4 bg-slate-800 text-white font-bold rounded-lg hover:bg-slate-700 border border-slate-700 transition-colors">
-                    了解核心功能
+                <a href="#features" class="btn-game px-10 py-4 bg-anime-card border border-anime-blue/30 text-anime-blue font-bold text-lg hover:bg-anime-blue/10 hover:border-anime-blue transition-all">
+                    了解核心机能
                 </a>
             </div>
         </div>
     </header>
 
     <!-- Demo Section -->
-    <section id="demo" class="px-4 py-10 relative">
+    <section id="demo" class="px-4 py-10 relative z-10">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold mb-4">实时演算内核演示</h2>
-                <p class="text-gray-400">基于数百万局牌谱训练的深度学习模型</p>
+            <div class="flex items-end gap-4 mb-8 border-b border-gray-700 pb-4">
+                <h2 class="text-3xl md:text-4xl font-black italic text-white"><span class="text-anime-blue">#</span> 实时演算演示</h2>
+                <span class="text-anime-pink font-mono text-sm mb-1.5">LIVE DEMONSTRATION</span>
             </div>
             
             <!-- AI Demo Component -->
-            <div class="w-full max-w-4xl mx-auto p-4 sm:p-8 bg-card-bg border border-slate-700 rounded-2xl shadow-2xl relative overflow-hidden group">
-                <!-- Background Decor -->
-                <div class="absolute top-0 right-0 w-64 h-64 bg-neon-purple opacity-5 blur-[100px] pointer-events-none"></div>
-                <div class="absolute bottom-0 left-0 w-64 h-64 bg-neon-green opacity-5 blur-[100px] pointer-events-none"></div>
+            <div class="w-full max-w-4xl mx-auto p-1 bg-gradient-to-br from-anime-blue via-transparent to-anime-pink rounded-2xl">
+                <div class="bg-anime-bg rounded-2xl overflow-hidden relative">
+                    <!-- Grid Background inside card -->
+                    <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(#4a5568 1px, transparent 1px), linear-gradient(90deg, #4a5568 1px, transparent 1px); background-size: 20px 20px;"></div>
 
-                <div class="relative z-10">
-                    <div class="flex justify-between items-center mb-6">
-                        <div class="flex items-center space-x-2">
-                            <!-- Cpu Icon -->
-                            <svg class="text-neon-green w-6 h-6 animate-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>
-                            <h3 class="text-xl font-bold text-white tracking-widest">MAHJONG_MASTER v4.0.2 <span class="text-xs text-gray-400 bg-gray-800 px-2 py-1 rounded ml-2">LIVE</span></h3>
+                    <div class="relative z-10 p-4 sm:p-8">
+                        <!-- HUD Header -->
+                        <div class="flex justify-between items-center mb-8 bg-black/30 p-3 rounded-lg border-l-4 border-anime-pink">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-anime-green rounded-full animate-pulse"></div>
+                                <h3 class="text-lg font-bold font-mono tracking-widest text-white">MAHJONG_AI <span class="text-anime-blue">V4.0</span></h3>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-gray-400 font-mono">GAME STATE</div>
+                                <div class="text-anime-blue font-bold">东三局 12本场</div>
+                            </div>
                         </div>
-                        <div class="text-right">
-                            <div class="text-sm text-gray-400">当前局势</div>
-                            <div class="text-neon-green font-mono">东三局 12本场</div>
+
+                        <!-- Tiles Container -->
+                        <div id="tile-container" class="flex flex-wrap justify-center gap-1 sm:gap-3 mb-8 min-h-[90px] p-6 bg-black/20 rounded-xl border border-white/5 backdrop-blur-sm">
+                            <!-- Tiles injected by JS -->
                         </div>
-                    </div>
 
-                    <!-- Tiles Container -->
-                    <div id="tile-container" class="flex flex-wrap justify-center gap-1 sm:gap-2 mb-8 p-4 bg-slate-800/50 rounded-xl border border-slate-700/50 min-h-[80px]">
-                        <!-- Tiles injected by JS -->
-                    </div>
+                        <!-- Analysis Dashboard -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Win Rate -->
+                            <div class="glass-panel p-5 rounded-xl border-t-2 border-anime-blue relative overflow-hidden group">
+                                <div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-30 transition-opacity">
+                                    <svg class="w-16 h-16 text-anime-blue" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+                                </div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-400 text-xs font-mono tracking-widest">WIN PROBABILITY</span>
+                                    <span id="analysis-status" class="text-anime-blue text-xs font-bold animate-pulse hidden">[ CALCULATING ]</span>
+                                </div>
+                                <div id="win-rate-display" class="text-5xl font-black italic text-transparent bg-clip-text bg-gradient-to-r from-anime-blue to-white mb-3">
+                                    0.0%
+                                </div>
+                                <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                                    <div id="win-rate-bar" class="h-full bg-gradient-to-r from-anime-blue to-anime-purple shadow-[0_0_10px_#7afcff]" style="width: 0%; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);"></div>
+                                </div>
+                            </div>
 
-                    <!-- Analysis UI -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Stats Panel -->
-                        <div class="bg-black/40 p-4 rounded-lg border border-slate-700 flex flex-col justify-between h-32">
-                            <div class="flex items-center justify-between">
-                                <span class="text-gray-400 text-sm flex items-center">
-                                    <!-- Activity Icon -->
-                                    <svg class="mr-1 w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                                    实时胜率预测
+                            <!-- Suggestion -->
+                            <div class="glass-panel p-5 rounded-xl border-t-2 border-anime-pink flex flex-col justify-center items-center text-center relative">
+                                <div id="action-content" class="w-full">
+                                    <div class="flex flex-col items-center justify-center text-gray-500 py-2">
+                                        <svg class="w-8 h-8 mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                        <span class="text-xs font-mono">WAITING FOR INPUT...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex justify-center">
+                            <button id="simulate-btn" class="btn-game relative px-12 py-3 bg-anime-blue/10 hover:bg-anime-blue/20 text-anime-blue font-bold text-lg border-2 border-anime-blue transition-all hover:shadow-[0_0_30px_rgba(122,252,255,0.3)] disabled:opacity-50 disabled:cursor-not-allowed group overflow-hidden">
+                                <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-shimmer"></span>
+                                <span class="flex items-center gap-2 relative z-10">
+                                    <span id="simulate-btn-text">INITIALIZE SIMULATION</span>
                                 </span>
-                                <span id="analysis-status" class="text-neon-green text-xs animate-pulse hidden">CALCULATING...</span>
-                            </div>
-                            <div id="win-rate-display" class="text-4xl font-mono font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-blue-500">
-                                0.0%
-                            </div>
-                            <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
-                                <div id="win-rate-bar" class="h-full bg-neon-green transition-all duration-1000 ease-out" style="width: 0%"></div>
-                            </div>
+                            </button>
                         </div>
-
-                        <!-- Action Panel -->
-                        <div class="bg-black/40 p-4 rounded-lg border border-slate-700 flex flex-col justify-center items-center h-32">
-                            <div id="action-content" class="w-full h-full flex items-center justify-center">
-                                <!-- Content injected by JS -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-6 flex justify-center">
-                        <button id="simulate-btn" class="group relative px-8 py-3 bg-neon-green/10 hover:bg-neon-green/20 text-neon-green font-bold rounded-full border border-neon-green transition-all hover:shadow-[0_0_20px_rgba(52,211,153,0.4)] disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden">
-                            <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1s_infinite]"></div>
-                            <span class="flex items-center gap-2">
-                                <!-- Zap Icon -->
-                                <svg class="w-[18px] h-[18px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                                <span id="simulate-btn-text">立即模拟 (Simulate)</span>
-                            </span>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -181,92 +263,117 @@
     </section>
 
     <!-- Features Grid -->
-    <section id="features" class="py-20 px-6 bg-black/20">
+    <section id="features" class="py-20 px-6 relative z-10">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">超越人类极限的计算力</h2>
-                <div class="h-1 w-20 bg-neon-purple mx-auto rounded-full"></div>
+                <h2 class="text-3xl md:text-5xl font-black italic mb-4">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-anime-pink to-anime-purple">超越人类</span>的计算力
+                </h2>
+                <div class="flex justify-center gap-2">
+                    <div class="w-12 h-1 bg-anime-blue skew-x-12"></div>
+                    <div class="w-4 h-1 bg-anime-pink skew-x-12"></div>
+                    <div class="w-2 h-1 bg-white skew-x-12"></div>
+                </div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Feature 1 -->
-                <div class="bg-card-bg p-6 rounded-xl border border-slate-800 hover:border-neon-purple/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(176,38,255,0.1)] group">
-                    <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <svg class="text-neon-purple w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.97-3.465"/><path d="M17.97 14.535A4 4 0 0 1 18 18"/></svg>
+                <div class="glass-panel p-8 rounded-2xl hover:border-anime-purple/50 transition-all duration-300 group hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-anime-purple/20 rounded-xl flex items-center justify-center mb-6 text-anime-purple border border-anime-purple/30 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(176,38,255,0.2)]">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">全自动托管打牌</h3>
-                    <p class="text-gray-400 leading-relaxed">解放双手，AI 自动执行最优解。无论是快速场还是段位战，不仅能打，而且打得好。完美模拟高手思路。</p>
+                    <h3 class="text-xl font-bold text-white mb-3">全自动托管</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">解放双手，AI 自动执行最优解。段位战稳定上分，完美模拟高手牌效与心理博弈。</p>
                 </div>
                 <!-- Feature 2 -->
-                <div class="bg-card-bg p-6 rounded-xl border border-slate-800 hover:border-neon-purple/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(176,38,255,0.1)] group">
-                    <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <svg class="text-neon-green w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="22" x2="18" y1="12" y2="12"/><line x1="6" x2="2" y1="12" y2="12"/><line x1="12" x2="12" y1="6" y2="2"/><line x1="12" x2="12" y1="22" y2="18"/></svg>
+                <div class="glass-panel p-8 rounded-2xl hover:border-anime-green/50 transition-all duration-300 group hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-neon-green/20 rounded-xl flex items-center justify-center mb-6 text-neon-green border border-neon-green/30 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(0,255,157,0.2)]">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">胜率实时预测</h3>
-                    <p class="text-gray-400 leading-relaxed">上帝视角显示每一张切牌后的听牌胜率、改良进张以及对手可能的听牌范围。不再迷茫。</p>
+                    <h3 class="text-xl font-bold text-white mb-3">胜率预测</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">上帝视角显示每一张切牌后的听牌胜率、改良进张。数据可视化，不再迷茫。</p>
                 </div>
                 <!-- Feature 3 -->
-                <div class="bg-card-bg p-6 rounded-xl border border-slate-800 hover:border-neon-purple/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(176,38,255,0.1)] group">
-                    <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <svg class="text-blue-500 w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                <div class="glass-panel p-8 rounded-2xl hover:border-anime-blue/50 transition-all duration-300 group hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-anime-blue/20 rounded-xl flex items-center justify-center mb-6 text-anime-blue border border-anime-blue/30 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(122,252,255,0.2)]">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">智能防点炮</h3>
-                    <p class="text-gray-400 leading-relaxed">通过深度分析场上舍牌，精确计算对手听牌危险度。在进攻与防守之间找到完美平衡点。</p>
+                    <h3 class="text-xl font-bold text-white mb-3">智能防点炮</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">通过深度学习分析场上舍牌，精确计算对手听牌危险度。攻守兼备，立于不败之地。</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Why Us -->
-    <section class="py-20 px-6">
-        <div class="max-w-4xl mx-auto bg-slate-900/50 rounded-2xl border border-slate-800 p-8 sm:p-12">
-            <h2 class="text-2xl font-bold mb-8 text-center">为什么选择 MahjongMaster?</h2>
-            <div class="space-y-4">
-                <div class="flex items-center gap-4">
-                    <svg class="text-neon-green w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                    <p class="text-lg">独家算法内核，非市面普通脚本可比</p>
+    <section class="py-20 px-6 relative z-10">
+        <div class="max-w-4xl mx-auto glass-panel rounded-3xl p-8 sm:p-12 relative overflow-hidden">
+            <!-- Decoration -->
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-anime-pink/20 blur-[80px] rounded-full"></div>
+            
+            <h2 class="text-2xl font-black italic mb-8 text-center text-white">为什么选择 <span class="text-anime-pink">MahjongMaster</span>?</h2>
+            <div class="space-y-6 relative z-10">
+                <div class="flex items-start gap-4 p-4 rounded-lg bg-black/20 hover:bg-black/40 transition-colors">
+                    <div class="bg-anime-green/20 p-2 rounded-full text-anime-green">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white">独家算法内核</h4>
+                        <p class="text-sm text-gray-400">非市面普通脚本可比，采用神经网络深度学习模型。</p>
+                    </div>
                 </div>
-                <div class="flex items-center gap-4">
-                    <svg class="text-neon-green w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                    <p class="text-lg">持续更新适配雀魂最新版本，稳定奔放</p>
+                <div class="flex items-start gap-4 p-4 rounded-lg bg-black/20 hover:bg-black/40 transition-colors">
+                    <div class="bg-anime-blue/20 p-2 rounded-full text-anime-blue">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white">持续更新适配</h4>
+                        <p class="text-sm text-gray-400">跟随雀魂版本更新，确保稳定奔放。</p>
+                    </div>
                 </div>
-                <div class="flex items-center gap-4">
-                    <svg class="text-neon-green w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                    <p class="text-lg">专属内部群，提供 1对1 远程安装与调试服务</p>
-                </div>
-                <div class="flex items-center gap-4 text-gray-500">
-                    <svg class="text-yellow-600 w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-                    <p class="text-sm">郑重声明：本工具仅供学习AI算法研究使用，请勿用于破坏游戏公平性（懂的都懂）。</p>
+                <div class="flex items-start gap-4 p-4 rounded-lg bg-yellow-500/10 hover:bg-yellow-500/20 transition-colors">
+                    <div class="bg-yellow-500/20 p-2 rounded-full text-yellow-500">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white">专属内部群服务</h4>
+                        <p class="text-sm text-gray-400">提供 1对1 远程安装与调试服务。</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Spacer -->
-    <div class="h-20"></div>
+    <div class="h-24"></div>
 
     <!-- Sticky Contact -->
-    <div class="fixed bottom-0 left-0 w-full bg-black/90 backdrop-blur-md border-t border-neon-purple/50 z-50 py-4 px-4 shadow-[0_-5px_20px_rgba(0,0,0,0.8)]">
+    <div class="fixed bottom-0 left-0 w-full bg-[#161625]/95 backdrop-blur-xl border-t border-anime-pink/30 z-50 py-4 px-4 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-4">
                 <div class="relative">
-                    <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse border border-black"></span>
-                    <svg class="text-neon-green w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <span class="absolute -top-1 -right-1 w-3 h-3 bg-anime-pink rounded-full animate-pulse border border-black z-10"></span>
+                    <div class="w-10 h-10 bg-gradient-to-br from-anime-pink to-purple-600 rounded-lg flex items-center justify-center text-white shadow-lg">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                    </div>
                 </div>
                 <div>
-                    <h4 class="text-white font-bold text-lg leading-tight">加入内部核心群</h4>
+                    <h4 class="text-white font-bold text-lg leading-tight flex items-center gap-2">
+                        加入内部核心群
+                        <span class="text-[10px] bg-anime-blue text-black px-1.5 py-0.5 rounded font-bold">HOT</span>
+                    </h4>
                     <p class="text-gray-400 text-xs">获取最新防封版本 & 实时指导</p>
                 </div>
             </div>
 
-            <div class="flex gap-2 sm:gap-4 w-full sm:w-auto">
-                <div onclick="copyQQ('1106131344')" class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg cursor-pointer border border-slate-600 transition-colors">
-                    <span class="font-mono font-bold text-neon-green">QQ: 1106131344</span>
-                    <svg class="text-gray-400 w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            <div class="flex gap-2 w-full sm:w-auto">
+                <div onclick="copyQQ('1106131344')" class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-anime-card hover:bg-anime-purple/20 text-white px-5 py-2.5 rounded-lg cursor-pointer border border-gray-700 hover:border-anime-pink transition-all active:scale-95">
+                    <span class="font-mono font-bold text-anime-pink text-sm sm:text-base">QQ: 1106131344</span>
+                    <svg class="text-gray-400 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                 </div>
-                <div onclick="copyQQ('2110417355')" class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg cursor-pointer border border-slate-600 transition-colors">
-                    <span class="font-mono font-bold text-neon-green">QQ: 2110417355</span>
-                    <svg class="text-gray-400 w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                <div onclick="copyQQ('2110417355')" class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-anime-card hover:bg-anime-purple/20 text-white px-5 py-2.5 rounded-lg cursor-pointer border border-gray-700 hover:border-anime-pink transition-all active:scale-95">
+                    <span class="font-mono font-bold text-anime-pink text-sm sm:text-base">QQ: 2110417355</span>
+                    <svg class="text-gray-400 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                 </div>
             </div>
         </div>
@@ -274,7 +381,35 @@
 
     <!-- Application Logic -->
     <script>
-        // Constants
+        // --- 1. Sakura Animation Logic ---
+        function createSakura() {
+            const container = document.getElementById('sakura-container');
+            const petal = document.createElement('div');
+            petal.classList.add('sakura');
+            
+            // Randomize size, position, and duration
+            const size = Math.random() * 10 + 5;
+            const startLeft = Math.random() * window.innerWidth;
+            const duration = Math.random() * 5 + 5;
+            
+            petal.style.width = `${size}px`;
+            petal.style.height = `${size}px`;
+            petal.style.left = `${startLeft}px`;
+            petal.style.animationDuration = `${duration}s`;
+            
+            container.appendChild(petal);
+            
+            // Remove after animation
+            setTimeout(() => {
+                petal.remove();
+            }, duration * 1000);
+        }
+
+        // Spawn sakura every 300ms
+        setInterval(createSakura, 300);
+
+
+        // --- 2. Mahjong Game Logic ---
         const INITIAL_HAND = [
             { id: 1, type: 'man', value: 1, symbol: '🀇' },
             { id: 2, type: 'man', value: 2, symbol: '🀈' },
@@ -291,20 +426,18 @@
             { id: 13, type: 'honors', value: 6, symbol: '🀅' },
         ];
 
-        // State
         let state = {
             analyzing: false,
-            result: null // { discardIndex: number, winRate: number }
+            result: null
         };
 
-        // Utility to copy QQ
         function copyQQ(qq) {
             navigator.clipboard.writeText(qq).then(() => {
-                alert('QQ号 ' + qq + ' 已复制');
+                // Custom anime style alert could go here, sticking to native for simplicity
+                alert(`QQ号 ${qq} 已复制`);
             });
         }
 
-        // Render Tiles
         function renderTiles() {
             const container = document.getElementById('tile-container');
             container.innerHTML = '';
@@ -315,15 +448,15 @@
                 
                 const tileColor = tile.type === 'man' ? '#8b0000' : tile.type === 'sou' ? '#006400' : 'black';
                 
-                // Construct classes
-                let classes = "relative w-10 h-14 sm:w-12 sm:h-16 bg-slate-100 rounded-md shadow-[0_4px_0_#cbd5e1] flex items-center justify-center text-3xl sm:text-4xl select-none cursor-pointer transition-all duration-300 transform border border-gray-300";
+                // Anime Style Tile: cleaner, white bg, slight gloss
+                let classes = "relative w-11 h-16 sm:w-14 sm:h-20 bg-gradient-to-b from-white to-gray-200 rounded-sm shadow-md flex items-center justify-center text-4xl sm:text-5xl select-none cursor-pointer transition-all duration-300 transform border border-gray-300 group";
                 
                 if (isHighlight) {
-                    classes += " translate-y-[-10px] shadow-[0_14px_0_#34d399] border-neon-green ring-2 ring-neon-green z-10";
+                    classes += " -translate-y-4 shadow-[0_0_20px_#ff7eb3] ring-2 ring-anime-pink z-10 scale-110";
                 } else if (isDimmed) {
-                    classes += " opacity-50 grayscale";
+                    classes += " opacity-60 brightness-75 blur-[0.5px]";
                 } else {
-                    classes += " hover:translate-y-[-2px] hover:shadow-[0_6px_0_#cbd5e1]";
+                    classes += " hover:-translate-y-1 hover:shadow-lg hover:border-anime-blue";
                 }
 
                 const el = document.createElement('div');
@@ -331,14 +464,14 @@
                 el.style.color = tileColor;
                 el.innerHTML = `
                     <span class="drop-shadow-sm">${tile.symbol}</span>
-                    ${isHighlight ? '<div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-neon-green text-black text-[10px] font-bold px-2 py-0.5 rounded shadow-lg animate-bounce">切</div>' : ''}
+                    <div class="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/80 to-transparent rounded-t-sm pointer-events-none"></div>
+                    ${isHighlight ? '<div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-anime-pink text-white text-[12px] font-bold px-2 py-0.5 rounded shadow-lg animate-bounce whitespace-nowrap">オススメ (切)</div>' : ''}
                 `;
                 
                 container.appendChild(el);
             });
         }
 
-        // Render Status
         function renderStatus() {
             const btn = document.getElementById('simulate-btn');
             const btnText = document.getElementById('simulate-btn-text');
@@ -347,20 +480,18 @@
             const winRateBar = document.getElementById('win-rate-bar');
             const actionContent = document.getElementById('action-content');
 
-            // Button State
             if (state.analyzing) {
                 btn.disabled = true;
-                btnText.textContent = "AI 分析中...";
+                btnText.textContent = "ANALYZING...";
                 statusEl.classList.remove('hidden');
             } else {
                 btn.disabled = false;
-                btnText.textContent = "立即模拟 (Simulate)";
+                btnText.textContent = "INITIALIZE SIMULATION";
                 statusEl.classList.add('hidden');
             }
 
-            // Win Rate Display
             if (state.analyzing) {
-                winRateDisplay.innerHTML = '<span class="animate-pulse">--.-%</span>';
+                winRateDisplay.innerHTML = '<span class="animate-pulse opacity-50">CALC...</span>';
                 winRateBar.style.width = '0%';
             } else if (state.result) {
                 winRateDisplay.textContent = state.result.winRate + '%';
@@ -370,37 +501,35 @@
                 winRateBar.style.width = '0%';
             }
 
-            // Action Content
             if (!state.analyzing && state.result) {
                 const targetTile = INITIAL_HAND[state.result.discardIndex];
                 actionContent.innerHTML = `
                    <div class="text-center animate-[fadeIn_0.5s_ease-out]">
-                      <p class="text-gray-400 text-xs uppercase tracking-widest mb-1">最佳策略 / Best Move</p>
-                      <p class="text-2xl font-bold text-white mb-1">切 <span class="text-neon-green">${targetTile.symbol}</span> 听牌</p>
-                      <p class="text-xs text-neon-purple">期望值 +12000 pts</p>
+                      <p class="text-anime-pink text-xs font-bold tracking-widest mb-2">AI RECOMMENDATION</p>
+                      <div class="flex items-center justify-center gap-2 mb-1">
+                        <span class="text-gray-300">打</span>
+                        <span class="text-4xl text-white font-bold bg-black/20 px-3 py-1 rounded border border-anime-pink">${targetTile.symbol}</span>
+                      </div>
+                      <p class="text-xs text-anime-blue mt-2 font-mono">EV: +12000 | SHANTEN: 0</p>
                    </div>
                 `;
             } else {
-                // Waiting or Loading state
-                const iconClass = state.analyzing ? "animate-spin" : "";
-                const text = state.analyzing ? "分析牌谱中..." : "等待输入...";
+                const iconClass = state.analyzing ? "animate-spin text-anime-pink" : "text-gray-600";
+                const text = state.analyzing ? "Reading game state..." : "Waiting for input...";
                 
                 actionContent.innerHTML = `
-                   <div class="flex flex-col items-center justify-center text-gray-500">
-                      <svg class="w-8 h-8 mb-2 ${iconClass}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                      <span class="text-xs tracking-wider">${text}</span>
+                   <div class="flex flex-col items-center justify-center text-gray-500 py-2">
+                      <svg class="w-8 h-8 mb-2 ${iconClass}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                      <span class="text-xs font-mono tracking-wider">${text}</span>
                    </div>
                 `;
             }
         }
 
-        // Logic
         function runAnalysis() {
             if (state.analyzing) return;
-            
             state.analyzing = true;
             state.result = null;
-            
             renderTiles();
             renderStatus();
 
@@ -415,19 +544,13 @@
             }, 1500);
         }
 
-        // Init
         document.addEventListener('DOMContentLoaded', () => {
-            const btn = document.getElementById('simulate-btn');
-            btn.addEventListener('click', runAnalysis);
-
-            // Initial Render
+            document.getElementById('simulate-btn').addEventListener('click', runAnalysis);
             renderTiles();
             renderStatus();
-            
-            // Auto run once
-            setTimeout(runAnalysis, 1000);
+            // Auto run demo once
+            setTimeout(runAnalysis, 1200);
         });
-
     </script>
 </body>
 </html>
